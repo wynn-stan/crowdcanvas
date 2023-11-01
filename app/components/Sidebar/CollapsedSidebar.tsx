@@ -4,6 +4,8 @@ import { LogIn, Menu, Plus, X } from "lucide-react";
 import styled from "styled-components";
 import Wrapper from "./Wrapper/Wrapper";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
+import Auth from "../Auth/Auth";
 
 export default function CollapsedSidebar() {
   return (
@@ -53,12 +55,9 @@ export default function CollapsedSidebar() {
                 {user ? (
                   <Button onClick={() => setUser(null)}>Log out</Button>
                 ) : (
-                  <Button
-                    className="!bg-blue"
-                    onClick={() => setUser({ full_name: "Jeffery_Davis" })}
-                  >
-                    Log In
-                  </Button>
+                  <Auth>
+                    <Button className="!bg-blue">Log In</Button>
+                  </Auth>
                 )}
               </div>
             </StyledDrawerSide>

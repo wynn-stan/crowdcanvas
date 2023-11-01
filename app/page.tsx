@@ -30,13 +30,14 @@ export default function Home() {
             <span className="posts-heading">Posts</span>
             <div className="flex gap-4 items-center">
               <span>{user?.full_name}</span>
-              <div className="rounded-full bg-gray-20">
+              <div className="">
                 <img
                   alt="profile-img"
                   src={`${process.env["NEXT_PUBLIC_AVATAR_URL"]}/?seed=${user?.full_name}`}
+                  className="rounded-full"
                   loading="lazy"
-                  width={35}
-                  height={35}
+                  width={40}
+                  height={40}
                 />
               </div>
             </div>

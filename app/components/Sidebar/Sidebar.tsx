@@ -7,6 +7,8 @@ import { useWindowWidth } from "@react-hook/window-size";
 
 import { UserContext } from "../../Contexts/user";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
+import Auth from "../Auth/Auth";
 
 interface TabItems {
   [key: string]: {
@@ -91,12 +93,11 @@ export default function Wrapper() {
             {isTablet ? <Plus /> : "Log out"}
           </Button>
         ) : (
-          <Button
-            className="!bg-blue"
-            onClick={() => setUser({ full_name: "Jeffery_Davis" })}
-          >
-            {isTablet ? <LogIn /> : "Log In"}
-          </Button>
+          <Auth>
+            <Button className="!bg-blue">
+              {isTablet ? <LogIn /> : "Log In"}
+            </Button>
+          </Auth>
         )}
       </div>
     </StyledSidebar>
