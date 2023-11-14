@@ -1,8 +1,9 @@
 import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
+import ReactGA from "react-ga4";
 
 import Sidebar from "./components/Sidebar/Index";
-import Providers from "./Providers/Providers";
+import Providers from "../Providers/Providers";
 import "./globals.css";
 
 const poppins = Poppins({ weight: "500", subsets: ["latin"] });
@@ -18,6 +19,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  ReactGA.initialize(process.env["NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY"] as string);
+  ReactGA.send({ hitType: "pageview" });
+
   return (
     <html lang="en">
       <body className={poppins.className}>

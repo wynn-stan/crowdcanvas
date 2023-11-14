@@ -1,11 +1,20 @@
 "use client";
 
-import { emailRegex } from "@/app/utils";
 import { Field, Formik } from "formik";
 import styled from "styled-components";
+import { useContext } from "react";
 import * as yup from "yup";
 
-export default function LogInForm() {
+import { emailRegex } from "../../../../utils";
+import { UserContext } from "../../../../Contexts/user";
+
+interface Props {
+  onHide: () => void;
+}
+
+export default function LogInForm({ onHide }: Props) {
+  const { setUser } = useContext(UserContext);
+
   return (
     <Formik
       validateOnMount
@@ -20,19 +29,25 @@ export default function LogInForm() {
         email: "",
         password: "",
       }}
-      onSubmit={() => {
-        console.log("submit");
+      onSubmit={({ email }) => {
+        setUser({
+          full_name: email,
+        });
+        onHide();
       }}
     >
       {({ values, handleSubmit, isSubmitting, isValid, setFieldValue }) => (
-        <form className="">
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-col gap-7">
             <InputField type="email" label="Email" name="email" />
 
             <InputField type="password" label="Password" name="password" />
           </div>
 
-          <button className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium">
+          <button
+            onClick={() => handleSubmit()}
+            className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
+          >
             Log in
           </button>
         </form>

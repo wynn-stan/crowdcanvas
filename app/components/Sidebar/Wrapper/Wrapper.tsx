@@ -1,12 +1,9 @@
 "use client";
 
 import { useContext, useState, Dispatch, SetStateAction } from "react";
-import { Home, LucideIcon, Settings, LogIn, Plus } from "lucide-react";
-import styled from "styled-components";
-import { useWindowWidth } from "@react-hook/window-size";
+import { Home, LucideIcon, Settings } from "lucide-react";
 
-import { UserContext } from "../../../Contexts/user";
-import Button from "../../Button/Button";
+import { UserContext } from "../../../../Contexts/user";
 
 interface TabItems {
   [key: string]: {

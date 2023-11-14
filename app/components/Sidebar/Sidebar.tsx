@@ -4,8 +4,9 @@ import { useContext, useState, Dispatch, SetStateAction } from "react";
 import { Home, LucideIcon, Settings, LogIn, Plus } from "lucide-react";
 import styled from "styled-components";
 import { useWindowWidth } from "@react-hook/window-size";
+import { useRouter } from "next/navigation";
 
-import { UserContext } from "../../Contexts/user";
+import { UserContext } from "../../../Contexts/user";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import Auth from "../Auth/Auth";
@@ -57,6 +58,9 @@ export default function Wrapper() {
   const width = useWindowWidth();
   const isTablet = width <= 834;
 
+  //routing
+  const router = useRouter();
+
   return (
     <StyledSidebar data-isTablet={isTablet}>
       <div className="flex flex-col gap-12 ">
@@ -89,14 +93,16 @@ export default function Wrapper() {
 
       <div className="flex justify-center">
         {user ? (
-          <Button onClick={() => setUser(null)}>
-            {isTablet ? <Plus /> : "Log out"}
+          <Button onClick={() => router.push("/create")}>
+            {isTablet ? <Plus /> : "New Post"}
           </Button>
         ) : (
           <Auth>
-            <Button className="!bg-blue">
-              {isTablet ? <LogIn /> : "Log In"}
-            </Button>
+            {({ proceed }) => (
+              <Button className="!bg-blue" onClick={() => proceed()}>
+                {isTablet ? <LogIn /> : "Log In"}
+              </Button>
+            )}
           </Auth>
         )}
       </div>

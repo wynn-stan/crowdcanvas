@@ -1,40 +1,33 @@
-"use client";
-
-import { X } from "lucide-react";
+import { Button, Modal as RestartModal } from "@restart/ui";
+import { useState } from "react";
 
 interface Props {
-  modal_id: string;
-  Toggler: () => JSX.Element;
-  children: React.ReactNode;
+  show: boolean;
+  onHide: () => void;
   modalClassName?: string;
+  children: React.ReactNode;
 }
 
 export default function Modal({
-  modal_id,
-  Toggler,
+  show,
+  onHide,
   modalClassName,
   children,
 }: Props) {
   return (
-    <>
-      <div
-        onClick={(e) => {
-          const element = document.getElementById(modal_id) as any;
-          element?.showModal();
-        }}
-      >
-        <Toggler />
-      </div>
-      <dialog id={modal_id} className="modal modal-bottom sm:modal-middle">
-        <div className={`modal-box ${modalClassName}`}>
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              <X />
-            </button>
-          </form>
-          {children}
-        </div>
-      </dialog>
-    </>
+    <RestartModal
+      show={show}
+      aria-labelledby="modal-1-label"
+      onHide={onHide}
+      renderBackdrop={(props) => (
+        <div
+          {...props}
+          className="fixed inset-0 bg-black/30 z-[300] backdrop-blur"
+        />
+      )}
+      className={`fixed z-[301] top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white shadow-lg overflow-auto h-full ${modalClassName}`}
+    >
+      <>{children}</>
+    </RestartModal>
   );
 }

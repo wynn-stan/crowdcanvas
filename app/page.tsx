@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 
 import CollapsedSidebar from "./components/Sidebar/CollapsedSidebar";
-import { UserContext } from "./Contexts/user";
+import { UserContext } from "../Contexts/user";
 
 export default function Home() {
   //hooks

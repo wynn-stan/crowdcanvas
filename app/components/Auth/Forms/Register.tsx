@@ -1,11 +1,20 @@
 "use client";
 
-import { emailRegex } from "@/app/utils";
 import { Field, Formik } from "formik";
 import styled from "styled-components";
+import { useContext } from "react";
 import * as yup from "yup";
 
-export default function RegisterForm() {
+import { emailRegex } from "../../../../utils";
+import { UserContext } from "../../../../Contexts/user";
+
+interface Props {
+  onHide: () => void;
+}
+
+export default function RegisterForm({ onHide }: Props) {
+  const { setUser } = useContext(UserContext);
+
   return (
     <Formik
       validateOnMount
@@ -28,12 +37,15 @@ export default function RegisterForm() {
         password: "",
         confirm_password: "",
       }}
-      onSubmit={() => {
-        console.log("submit");
+      onSubmit={({ first_name, last_name }, { setSubmitting }) => {
+        setUser({
+          full_name: `${first_name} ${last_name}`,
+        });
+        onHide();
       }}
     >
       {({ values, handleSubmit, isSubmitting, isValid, setFieldValue }) => (
-        <form className="">
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-col gap-7">
             <div className="flex flex-col sm:flex-row gap-7 sm:gap-9">
               <InputField name="first_name" label="First Name" />
@@ -52,7 +64,10 @@ export default function RegisterForm() {
             </div>
           </div>
 
-          <button className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium">
+          <button
+            onClick={() => handleSubmit()}
+            className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
+          >
             Create account
           </button>
         </form>
@@ -71,7 +86,7 @@ function InputField({
   type?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
       <label className="text-[13px] font-medium" htmlFor={name}>
         {label}
       </label>

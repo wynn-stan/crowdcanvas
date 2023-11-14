@@ -19,6 +19,7 @@ const config: Config = {
         gray: {
           DEFAULT: "#82818F",
           10: "#F8F8F8",
+          15: "#F7F9FC",
           20: "#E9E9E9",
           30: "#82818F",
           40: "#6F6F6F",

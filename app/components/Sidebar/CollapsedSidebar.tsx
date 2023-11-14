@@ -1,13 +1,16 @@
 "use client";
 
-import { LogIn, Menu, Plus, X } from "lucide-react";
+import { Menu, PlusIcon, X } from "lucide-react";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
+
 import Wrapper from "./Wrapper/Wrapper";
 import Button from "../Button/Button";
-import Modal from "../Modal/Modal";
 import Auth from "../Auth/Auth";
 
 export default function CollapsedSidebar() {
+  const router = useRouter();
+
   return (
     <div className="drawer w-fit">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -53,10 +56,16 @@ export default function CollapsedSidebar() {
 
               <div className="flex justify-center">
                 {user ? (
-                  <Button onClick={() => setUser(null)}>Log out</Button>
+                  <Button onClick={() => router.push("/create")}>
+                    <PlusIcon />
+                  </Button>
                 ) : (
                   <Auth>
-                    <Button className="!bg-blue">Log In</Button>
+                    {({ proceed }) => (
+                      <Button className="!bg-blue" onClick={() => proceed()}>
+                        Log In
+                      </Button>
+                    )}
                   </Auth>
                 )}
               </div>
