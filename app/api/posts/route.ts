@@ -12,7 +12,7 @@ export async function POST(req: Request, res: Response) {
         post_by,
       },
     });
-    return successRes(post);
+    return successRes({ message: "OK" });
   } catch (err) {
     return errorRes({ err });
   }
@@ -26,8 +26,15 @@ export async function GET(req: NextRequest, res: NextResponse) {
       where: {
         id: id ? id : undefined,
       },
+      orderBy: [{ createdAt: "desc" }],
       include: {
-        author: true,
+        author: {
+          select: {
+            profile_image_url: true,
+            first_name: true,
+            last_name: true,
+          },
+        },
         comments: id ? true : false,
         _count: {
           select: { comments: true },

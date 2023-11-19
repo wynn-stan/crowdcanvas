@@ -12,6 +12,12 @@ export async function POST(req: Request, res: Response) {
         password,
         profile_image_url: `https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=${first_name}_${last_name}`,
       },
+      select: {
+        first_name: true,
+        last_name: true,
+        id: true,
+        profile_image_url: true,
+      },
     });
     return successRes({ user });
   } catch (err) {

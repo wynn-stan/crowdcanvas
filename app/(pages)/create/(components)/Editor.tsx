@@ -25,7 +25,6 @@ export default function Editor() {
       axios
         .post("/api/posts", { ...values, post_by: user?.id })
         .then((data) => {
-          console.log(data);
           toast.success("Success");
         })
         .catch((err) => {

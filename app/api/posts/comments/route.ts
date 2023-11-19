@@ -12,8 +12,15 @@ export async function GET(req: NextRequest, res: NextResponse) {
           where: {
             created_for: post_id,
           },
+          orderBy: [{ createdAt: "desc" }],
           include: {
-            author: true,
+            author: {
+              select: {
+                first_name: true,
+                last_name: true,
+                profile_image_url: true,
+              },
+            },
           },
         })
       : null;
@@ -49,8 +56,6 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
   try {
     const params = req.nextUrl.searchParams;
     const comment_id = params.get("comment_id");
-
-    console.log("reach");
 
     if (comment_id) {
       const status = await prisma.comment.delete({

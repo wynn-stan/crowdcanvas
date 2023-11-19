@@ -9,6 +9,12 @@ export async function POST(req: Request, res: Response) {
         email: email,
         password: password,
       },
+      select: {
+        first_name: true,
+        last_name: true,
+        id: true,
+        profile_image_url: true,
+      },
     });
     if (user) {
       return successRes({ user });

@@ -32,7 +32,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
         id,
       },
       include: {
-        author: true,
+        author: {
+          select: {
+            first_name: true,
+            last_name: true,
+            profile_image_url: true,
+          },
+        },
         comments: true,
       },
     });
@@ -57,7 +63,6 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
       },
     });
 
-    console.log(status);
     return successRes(status);
   } catch (err) {
     return errorRes({ err });

@@ -55,37 +55,21 @@ export default function CommentItem({
           <div className="text-sm text-gray-50">{comment.content}</div>
         </div>
       </div>
-      {hasActions && (
-        <div>
-          <Dropdown>
-            <Dropdown.Toggle>
-              {(props) => (
-                <div {...props} className="cursor-pointer">
-                  <MoreHorizontal />
-                </div>
-              )}
-            </Dropdown.Toggle>
 
-            <Dropdown.Menu flip placement="bottom-start" fixed offset={[0, 18]}>
-              {(menuProps, meta) => (
-                <div
-                  {...menuProps}
-                  style={{
-                    position: "fixed",
-                    right: "34px",
-                    transition: "visibility 500ms, opacity 500ms",
-                    display: meta.show ? "block" : "none",
-                    opacity: meta.show ? "1" : "0",
-                  }}
-                >
-                  <StyledButton onClick={() => handleDelete()}>
-                    <span>Delete</span>
-                    <Trash2 size={16} className="text-gray-30" />
-                  </StyledButton>
-                </div>
-              )}
-            </Dropdown.Menu>
-          </Dropdown>
+      {hasActions && (
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0}>
+            <div className="cursor-pointer">
+              <MoreHorizontal />
+            </div>
+          </label>
+
+          <div tabIndex={0} className="shadow bg-white dropdown-content z-[1]">
+            <StyledButton onClick={() => handleDelete()}>
+              <span>Delete</span>
+              <Trash2 size={16} className="text-gray-30" />
+            </StyledButton>
+          </div>
         </div>
       )}
     </div>
