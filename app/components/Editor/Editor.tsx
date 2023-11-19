@@ -66,9 +66,8 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
 
       <div className="w-full h-full flex flex-col items-center px-5">
         <StyledEditor>
-          <input
+          <StyledInput
             placeholder="Title..."
-            className="text-3xl outline-none overflow-scroll"
             name="header"
             maxLength={190}
             value={formik.values.title}
@@ -80,6 +79,15 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
     </div>
   );
 }
+
+const StyledInput = styled.input`
+  font-size: 1.875rem /* 30px */;
+  line-height: 2.25rem /* 36px */;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+`;
 
 const StyledEditor = styled.div`
   overflow: auto;
