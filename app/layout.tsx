@@ -7,6 +7,7 @@ import Providers from "../Providers/Providers";
 import StyledComponentsRegistry from "./registry";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "CrowdCanvas",
@@ -15,12 +16,21 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  ReactGA.initialize(process.env["NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY"] as string);
-  ReactGA.send({ hitType: "pageview" });
-
   return (
     <html lang="en">
       <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process?.env?.["NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY"]}`}
+        />
+        <Script id="google-analytics">
+          {`
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+       
+         gtag('config', '${process?.env?.["NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY"]}');
+        `}
+        </Script>
         <StyledComponentsRegistry>
           <Providers>
             <Sidebar />
