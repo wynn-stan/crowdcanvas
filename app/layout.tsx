@@ -31,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
          gtag('config', '${process?.env?.["NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY"]}');
         `}
         </Script>
+        <Script id="scripttag">{`gtag('event', "screen_view")`}</Script>
         <StyledComponentsRegistry>
           <Providers>
             <Sidebar />
