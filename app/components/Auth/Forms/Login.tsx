@@ -4,9 +4,12 @@ import { Field, Formik } from "formik";
 import styled from "styled-components";
 import { useContext } from "react";
 import * as yup from "yup";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import { emailRegex } from "../../../../utils";
 import { UserContext } from "../../../../Contexts/user";
+import { UserModel } from "../../../../models";
 
 interface Props {
   onHide: () => void;
@@ -29,11 +32,19 @@ export default function LogInForm({ onHide }: Props) {
         email: "",
         password: "",
       }}
-      onSubmit={({ email }) => {
-        setUser({
-          full_name: email,
-        });
-        onHide();
+      onSubmit={({ email, password }) => {
+        axios
+          .post("/api/auth/login", {
+            email,
+            password,
+          })
+          .then(({ data }: { data: { user: UserModel } }) => {
+            setUser(data.user);
+            toast.success("success");
+          })
+          .catch((error) => {
+            toast.error(error?.response?.data?.message);
+          });
       }}
     >
       {({ values, handleSubmit, isSubmitting, isValid, setFieldValue }) => (

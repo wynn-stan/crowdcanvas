@@ -6,16 +6,31 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 
 import Toolbar from "./Toolbar";
+import Nav from "./Nav";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "@/Contexts/user";
 
 export default function Editor() {
+  const { user } = useContext(UserContext);
+
   //formik
   const formik = useFormik({
     initialValues: {
-      header: "Gutenberg",
+      title: "Gutenberg",
       description: "Write your thoughts...",
     },
     onSubmit: (values) => {
-      //
+      axios
+        .post("/api/posts", { ...values, post_by: user?.id })
+        .then((data) => {
+          console.log(data);
+          toast.success("Success");
+        })
+        .catch((err) => {
+          toast.error(err);
+        });
     },
   });
 
@@ -38,6 +53,8 @@ export default function Editor() {
 
   return (
     <>
+      <Nav onSubmit={formik.handleSubmit} />
+
       <Toolbar editor={editor} />
 
       <div className="w-full h-full flex flex-col items-center">
@@ -46,8 +63,8 @@ export default function Editor() {
             placeholder="Title..."
             className="text-3xl"
             name="header"
-            value={formik.values.header}
-            onChange={(e) => formik.setFieldValue("header", e.target.value)}
+            value={formik.values.title}
+            onChange={(e) => formik.setFieldValue("title", e.target.value)}
           />
           <EditorContent editor={editor} />
         </StyledEditor>

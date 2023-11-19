@@ -2,7 +2,7 @@ import { Button } from "@restart/ui";
 import { ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function Nav() {
+export default function Nav({ onSubmit }: { onSubmit: (props: any) => void }) {
   const router = useRouter();
 
   //functions
@@ -22,7 +22,7 @@ export default function Nav() {
         </Button>
         <Button
           className="py-2 px-5 bg-blue text-white rounded"
-          onClick={goToDashboard}
+          onClick={onSubmit}
         >
           Publish
         </Button>

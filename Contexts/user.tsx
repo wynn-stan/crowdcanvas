@@ -1,5 +1,6 @@
 "use client";
 
+import { UserModel } from "@/models";
 import {
   createContext,
   useState,
@@ -12,13 +13,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-interface User {
-  full_name: string;
-}
-
 export const UserContext = createContext<{
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
+  user: UserModel | null;
+  setUser: Dispatch<SetStateAction<UserModel | null>>;
 }>({ user: null, setUser: () => null });
 
 export default function User({ children }: Props) {

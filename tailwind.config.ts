@@ -15,6 +15,7 @@ const config: Config = {
         blue: {
           DEFAULT: "#3E495B",
           10: "#3040C4",
+          20: "#808C9F",
         },
         gray: {
           DEFAULT: "#82818F",

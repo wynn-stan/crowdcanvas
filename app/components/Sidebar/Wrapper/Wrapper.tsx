@@ -21,13 +21,7 @@ interface ChildrenProps {
 }
 
 interface Props {
-  children: ({
-    user,
-    setUser,
-    activeTab,
-    setActiveTab,
-    tabItems,
-  }: ChildrenProps) => JSX.Element;
+  children: ({ user, setUser, activeTab, setActiveTab, tabItems }: ChildrenProps) => JSX.Element;
 }
 
 export default function Wrapper({ children }: Props) {
@@ -42,10 +36,10 @@ export default function Wrapper({ children }: Props) {
       label: "Home",
       Icon: Home,
     },
-    settings: {
-      label: "Settings",
-      Icon: Settings,
-    },
+    // settings: {
+    //   label: "Settings",
+    //   Icon: Settings,
+    // },
   };
 
   return <>{children({ activeTab, setActiveTab, setUser, tabItems, user })}</>;

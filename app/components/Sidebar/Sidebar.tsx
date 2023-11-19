@@ -27,13 +27,7 @@ interface ChildrenProps {
 }
 
 interface Props {
-  children: ({
-    user,
-    setUser,
-    activeTab,
-    setActiveTab,
-    tabItems,
-  }: ChildrenProps) => JSX.Element;
+  children: ({ user, setUser, activeTab, setActiveTab, tabItems }: ChildrenProps) => JSX.Element;
 }
 
 export default function Wrapper() {
@@ -48,10 +42,10 @@ export default function Wrapper() {
       label: "Home",
       Icon: Home,
     },
-    settings: {
-      label: "Settings",
-      Icon: Settings,
-    },
+    // settings: {
+    //   label: "Settings",
+    //   Icon: Settings,
+    // },
   };
 
   //width
@@ -62,13 +56,10 @@ export default function Wrapper() {
   const router = useRouter();
 
   return (
-    <StyledSidebar data-isTablet={isTablet}>
+    <StyledSidebar data-isTablet={isTablet} className="border-r-2 border-gray-20">
       <div className="flex flex-col gap-12 ">
         {!isTablet && (
-          <div
-            style={{ letterSpacing: "-2%" }}
-            className="font-medium text-2xl text-center w-full"
-          >
+          <div style={{ letterSpacing: "-2%" }} className="font-medium text-2xl text-center w-full">
             CrowdCanvas
           </div>
         )}
@@ -93,9 +84,7 @@ export default function Wrapper() {
 
       <div className="flex justify-center">
         {user ? (
-          <Button onClick={() => router.push("/create")}>
-            {isTablet ? <Plus /> : "New Post"}
-          </Button>
+          <Button onClick={() => router.push("/create")}>{isTablet ? <Plus /> : "New Post"}</Button>
         ) : (
           <Auth>
             {({ proceed }) => (

@@ -1,10 +1,12 @@
 import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import ReactGA from "react-ga4";
+import { ToastContainer } from "react-toastify";
 
 import Sidebar from "./components/Sidebar/Index";
 import Providers from "../Providers/Providers";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({ weight: "500", subsets: ["latin"] });
 
@@ -14,11 +16,7 @@ export const metadata: Metadata = {
     "CrowdCanvas is a dynamic communicty Where ideas meet, and voices resonate. Be part of the creative flow",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   ReactGA.initialize(process.env["NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY"] as string);
   ReactGA.send({ hitType: "pageview" });
 
@@ -28,6 +26,8 @@ export default function RootLayout({
         <Providers>
           <Sidebar />
           {children}
+
+          <ToastContainer autoClose={5000} hideProgressBar />
         </Providers>
       </body>
     </html>

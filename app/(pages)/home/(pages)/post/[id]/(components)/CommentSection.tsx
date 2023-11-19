@@ -1,0 +1,67 @@
+"use client";
+
+import { UserContext } from "@/Contexts/user";
+import { CommentModel, PostModel } from "@/models";
+import { usePathname } from "next/navigation";
+import queryString from "query-string";
+import { useContext } from "react";
+import styled from "styled-components";
+import useSWR from "swr";
+import CommentForm from "./(others)/CommentForm";
+import CommentItem from "./(others)/CommentItem";
+
+export default function CommentSection({ post }: { post?: PostModel }) {
+  //path
+  const id = usePathname().split("/").slice(-1)[0];
+
+  //api
+  const {
+    data: comments,
+    error,
+    mutate,
+  } = useSWR<CommentModel[]>(
+    `/api/posts/comments?${queryString.stringify({
+      post_id: id,
+    })}`
+  );
+
+  //hooks
+  const { user } = useContext(UserContext);
+  return (
+    <div className="">
+      <div className="flex flex-col gap-4">
+        <div className="text-xl">Comments</div>
+        <div className="flex flex-col gap-5">
+          {comments?.map((comment, index) => (
+            <CommentItem key={index} comment={comment} mutate={mutate} />
+          ))}
+        </div>
+      </div>
+      <StyledRule />
+      <div className="flex flex-col gap-4">
+        <div className="text-gray-50">What do you think?</div>
+        <div className="flex gap-3 mb-5">
+          {user && <StyledName className="bg-gray-20">{user.first_name[0]}</StyledName>}
+          <CommentForm {...{ post_id: post?.id, mutate }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const StyledName = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 58px;
+  min-height: 58px;
+  border-radius: 50%;
+`;
+
+const StyledRule = styled.hr`
+  margin: 20px 0;
+
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-gray-20);
+`;
