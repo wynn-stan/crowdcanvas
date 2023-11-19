@@ -27,7 +27,7 @@ export default function Nav({
         </Button>
         <Button
           disabled={!isValid}
-          className={`py-2 px-5 bg-blue text-white rounded ${!isValid ? "bg-blue-20" : ""}`}
+          className={`py-2 px-5 bg-red text-white rounded ${!isValid ? "bg-blue-20" : ""}`}
           onClick={onSubmit}
         >
           {isSubmitting ? <LoaderIcon /> : "Publish"}

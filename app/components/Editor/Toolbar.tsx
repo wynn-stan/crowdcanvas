@@ -7,10 +7,13 @@ import {
   AlignRightIcon,
   BoldIcon,
   ItalicIcon,
+  LinkIcon,
   ListIcon,
   ListOrderedIcon,
   LucideIcon,
+  RedoIcon,
   UnderlineIcon,
+  UndoIcon,
 } from "lucide-react";
 import styled from "styled-components";
 
@@ -42,6 +45,25 @@ export default function Toolbar({ editor }: { editor: Editor | null }) {
         toggle: () => chainer().toggleUnderline().run(),
       },
     },
+    {
+      link: {
+        Icon: LinkIcon,
+        toggle: () =>
+          chainer()
+            .toggleLink({ href: editor.getAttributes("link").href, target: "_blank" })
+            .run(),
+      },
+    },
+    {
+      undo: {
+        Icon: UndoIcon,
+        toggle: () => chainer().undo().run(),
+      },
+      redo: {
+        Icon: RedoIcon,
+        toggle: () => chainer().redo().run(),
+      },
+    },
 
     // {
     //   bulletList: {
@@ -59,15 +81,8 @@ export default function Toolbar({ editor }: { editor: Editor | null }) {
             const Icon = group[key].Icon;
             const isActive = editor.isActive(key);
             return (
-              <span
-                key={index}
-                onClick={group[key].toggle}
-                className={`${isActive && "bg-blue"}`}
-              >
-                <Icon
-                  color={isActive ? "white" : undefined}
-                  className="cursor-pointer"
-                />
+              <span key={index} onClick={group[key].toggle} className={`${isActive && "bg-blue"}`}>
+                <Icon color={isActive ? "white" : undefined} className="cursor-pointer" />
               </span>
             );
           })}

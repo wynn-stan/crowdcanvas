@@ -5,6 +5,7 @@ import { useFormik, FormikHelpers } from "formik";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
 import * as yup from "yup";
 
 import Toolbar from "./Toolbar";
@@ -40,7 +41,16 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
 
   //editor
   const editor = useEditor({
-    extensions: [StarterKit.configure(), Underline.configure()],
+    extensions: [
+      StarterKit.configure(),
+      Underline.configure(),
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: "italic underline text-red",
+        },
+      }),
+    ],
     content: formik.values.description,
     onUpdate: ({ editor }: any) => {
       formik.setFieldValue("description", editor.getHTML());
