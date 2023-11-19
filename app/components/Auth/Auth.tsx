@@ -11,7 +11,11 @@ import { UserContext } from "@/Contexts/user";
 import { UserModel } from "@/models";
 
 interface Props {
-  children: (props: { proceed: () => void; user: UserModel | null }) => React.ReactElement;
+  children: (props: {
+    proceed: () => void;
+    onHide: () => void;
+    user: UserModel | null;
+  }) => React.ReactElement;
 }
 
 export default function Auth({ children }: Props) {
@@ -27,7 +31,7 @@ export default function Auth({ children }: Props) {
 
   return (
     <>
-      <>{children({ proceed: () => setShow(true), user })}</>
+      <>{children({ proceed: () => setShow(true), onHide, user })}</>
       <Modal
         show={show}
         onHide={onHide}
