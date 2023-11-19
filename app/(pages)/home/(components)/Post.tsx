@@ -27,17 +27,13 @@ export default function Post({ item }: Props) {
             height={41}
             className="rounded-full"
           />
-          <div className="flex flex-col gap-1 overflow-hidden">
-            <span className="truncate text-xs">{item?.title}</span>
-            <span className="truncate text-gray-30 text-sm">{item?.author?.first_name}</span>
-          </div>
+          <div className="line-clamp-2 text-sm">{item?.title}</div>
         </div>
         <div className="text-gray-30 text-[10px]">{dayjs(item?.updatedAt).fromNow()}</div>
       </div>
-      <div
-        className="text-xs truncate whitespace-pre-wrap max-h-[54px] h-full"
-        dangerouslySetInnerHTML={{ __html: item?.description }}
-      ></div>
+      <div className="text-xs line-clamp-3 max-h-[54px] h-full">
+        <div dangerouslySetInnerHTML={{ __html: item?.description }}></div>
+      </div>
 
       <div className="w-full flex justify-end">
         <span className="flex gap-1 text-xs text-gray-30">
