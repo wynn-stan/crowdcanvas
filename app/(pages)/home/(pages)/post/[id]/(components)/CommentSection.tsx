@@ -9,6 +9,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 import CommentForm from "./(others)/CommentForm";
 import CommentItem from "./(others)/CommentItem";
+import { Dot } from "lucide-react";
 
 export default function CommentSection({ post }: { post?: PostModel }) {
   //path
@@ -30,7 +31,10 @@ export default function CommentSection({ post }: { post?: PostModel }) {
   return (
     <div className="">
       <div className="flex flex-col gap-4">
-        <div className="text-xl">Comments</div>
+        <div className="text-xl flex gap-2 items-center">
+          <span>Comments</span>
+          <StyledCommentCount>{post?._count?.comments || "0"}</StyledCommentCount>
+        </div>
         <div className="flex flex-col gap-5">
           {comments?.map((comment, index) => (
             <CommentItem key={index} comment={comment} mutate={mutate} />
@@ -48,6 +52,18 @@ export default function CommentSection({ post }: { post?: PostModel }) {
     </div>
   );
 }
+
+const StyledCommentCount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #3e495b;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+`;
 
 const StyledName = styled.div`
   display: flex;
