@@ -64,7 +64,7 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
 
       <Toolbar editor={editor} />
 
-      <div className="w-full h-full flex flex-col items-center">
+      <div className="w-full h-full flex flex-col items-center px-5">
         <StyledEditor>
           <input
             placeholder="Title..."

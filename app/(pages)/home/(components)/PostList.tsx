@@ -74,6 +74,9 @@ const StyledContainer = styled.main<{ endRoute?: string }>`
     letter-spacing: 3%;
   }
 
+  height: 100vh;
+  overflow: auto;
+
   @media (max-width: 1024px) {
     display: ${({ endRoute }) => (endRoute === "home" ? "block" : "none")};
   }
