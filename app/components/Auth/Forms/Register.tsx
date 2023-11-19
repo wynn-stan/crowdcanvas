@@ -103,7 +103,9 @@ function InputField({
         name={name}
         className="bg-[#f5f6f7] border-[#E1E2E4] outline-0 py-2 px-4 h-[49px] font-normal"
       />
-      <ErrorMessage name={name} />
+      <span className="text-red text-xs">
+        <ErrorMessage name={name} />
+      </span>
     </div>
   );
 }
