@@ -18,7 +18,7 @@ export default function Post({ item }: Props) {
       className="bg-gray-10 p-5 flex flex-col gap-4 max-h-[160px] max-w-[304px] w-full rounded-lg cursor-pointer overflow-hidden"
     >
       <div className="flex gap-6 justify-between">
-        <div className="flex gap-4">
+        <div className="flex gap-4 overflow-hidden">
           <img
             src={item?.author?.profile_image_url || ""}
             alt="img"
