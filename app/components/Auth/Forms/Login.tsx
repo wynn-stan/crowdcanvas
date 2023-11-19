@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { emailRegex } from "../../../../utils";
 import { UserContext } from "../../../../Contexts/user";
 import { UserModel } from "../../../../models";
+import { Loader } from "lucide-react";
 
 interface Props {
   onHide: () => void;
@@ -29,7 +30,7 @@ export default function LogInForm({ onHide }: Props) {
         email: "",
         password: "",
       }}
-      onSubmit={({ email, password }) => {
+      onSubmit={({ email, password }, { setSubmitting }) => {
         axios
           .post("/api/auth/login", {
             email,
@@ -38,6 +39,7 @@ export default function LogInForm({ onHide }: Props) {
           .then(({ data }: { data: { user: UserModel } }) => {
             setUser(data.user);
             onHide();
+            setSubmitting(false);
             toast.success("success");
           })
           .catch((error) => {
@@ -57,7 +59,7 @@ export default function LogInForm({ onHide }: Props) {
             onClick={() => handleSubmit()}
             className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
           >
-            Log in
+            {isSubmitting ? <Loader /> : "Log in"}
           </button>
         </form>
       )}

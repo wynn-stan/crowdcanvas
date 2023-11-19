@@ -10,6 +10,7 @@ import { UserContext } from "../../../../Contexts/user";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { UserModel } from "@/models";
+import { Loader } from "lucide-react";
 
 interface Props {
   onHide: () => void;
@@ -41,6 +42,7 @@ export default function RegisterForm({ onHide }: Props) {
           .then(({ data }: { data: { user: UserModel } }) => {
             setUser(data.user);
             onHide();
+            setSubmitting(false);
             toast.success("Success");
           })
           .catch((error) => {
@@ -50,7 +52,6 @@ export default function RegisterForm({ onHide }: Props) {
     >
       {({ values, handleSubmit, isSubmitting, isValid, setFieldValue, errors }) => (
         <form onSubmit={(e) => e.preventDefault()}>
-          ={" "}
           <div className="flex flex-col gap-7">
             <div className="flex flex-col sm:flex-row gap-7 sm:gap-9">
               <InputField name="first_name" label="First Name" errors={errors} />
@@ -73,7 +74,7 @@ export default function RegisterForm({ onHide }: Props) {
             onClick={() => handleSubmit()}
             className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
           >
-            Create account
+            {isSubmitting ? <Loader /> : "Create account"}
           </button>
         </form>
       )}
