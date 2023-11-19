@@ -22,7 +22,7 @@ export default function Page() {
   const post = data?.[0];
 
   return (
-    <div className="w-full p-10 border-l-2 border-gray-10 h-screen overflow-auto">
+    <div className="w-full p-10 border-l-2 border-gray-10 min-h-screen md:h-screen md:overflow-auto">
       <div className="flex flex-col gap-12 h-full justify-between">
         <div className="flex flex-col gap-12">
           <PostAction post={post} />

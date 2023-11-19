@@ -68,7 +68,7 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
         <StyledEditor>
           <input
             placeholder="Title..."
-            className="text-3xl outline-none"
+            className="text-3xl outline-none overflow-auto"
             name="header"
             maxLength={190}
             value={formik.values.title}

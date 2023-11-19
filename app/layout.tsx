@@ -1,4 +1,3 @@
-import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import ReactGA from "react-ga4";
 import { ToastContainer } from "react-toastify";
@@ -8,8 +7,6 @@ import Providers from "../Providers/Providers";
 import StyledComponentsRegistry from "./registry";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
-
-const poppins = Poppins({ weight: "500", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CrowdCanvas",
@@ -23,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body>
         <StyledComponentsRegistry>
           <Providers>
             <Sidebar />
