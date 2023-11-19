@@ -11,7 +11,15 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-export default function CommentForm({ post_id, mutate }: { post_id?: string; mutate: () => void }) {
+export default function CommentForm({
+  post_id,
+  mutate,
+  mutatePost,
+}: {
+  post_id?: string;
+  mutate: () => void;
+  mutatePost: () => void;
+}) {
   const { user } = useContext(UserContext);
 
   return (
@@ -24,6 +32,7 @@ export default function CommentForm({ post_id, mutate }: { post_id?: string; mut
           addCommentService({ content, created_for: post_id, created_by: user.id })
             .then((data) => {
               mutate();
+              mutatePost();
               toast.success("Success");
             })
             .catch((err) => console.log(err))

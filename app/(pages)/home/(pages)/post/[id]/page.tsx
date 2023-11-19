@@ -13,7 +13,7 @@ export default function Page() {
   const id = usePathname().split("/").slice(-1)[0];
 
   //api
-  const { data, error } = useSWR<PostModel[]>(
+  const { data, error, mutate } = useSWR<PostModel[]>(
     `/api/posts?${queryString.stringify({
       id,
     })}`
@@ -30,7 +30,7 @@ export default function Page() {
           <PostContent post={post} />
         </div>
 
-        <CommentSection post={post} />
+        <CommentSection post={post} mutate={mutate} />
       </div>
     </div>
   );

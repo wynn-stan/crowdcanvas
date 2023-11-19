@@ -11,7 +11,13 @@ import CommentForm from "./(others)/CommentForm";
 import CommentItem from "./(others)/CommentItem";
 import { Dot } from "lucide-react";
 
-export default function CommentSection({ post }: { post?: PostModel }) {
+export default function CommentSection({
+  post,
+  mutate: mutatePost,
+}: {
+  post?: PostModel;
+  mutate: () => void;
+}) {
   //path
   const id = usePathname().split("/").slice(-1)[0];
 
@@ -46,7 +52,7 @@ export default function CommentSection({ post }: { post?: PostModel }) {
         <div className="text-gray-50">What do you think?</div>
         <div className="flex gap-3 mb-5">
           {user && <StyledName className="bg-gray-20">{user.first_name[0]}</StyledName>}
-          <CommentForm {...{ post_id: post?.id, mutate }} />
+          <CommentForm {...{ post_id: post?.id, mutate, mutatePost }} />
         </div>
       </div>
     </div>
