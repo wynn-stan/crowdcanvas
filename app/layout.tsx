@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ReactGA from "react-ga4";
 import { ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/react";
 
 import Sidebar from "./components/Sidebar/Index";
 import Providers from "../Providers/Providers";
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ToastContainer autoClose={5000} hideProgressBar />
           </Providers>
         </StyledComponentsRegistry>
+        <Analytics />
       </body>
     </html>
   );
