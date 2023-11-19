@@ -2,6 +2,7 @@
 
 import { PostModel } from "@/models";
 import dayjs from "dayjs";
+import { MessagesSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -15,7 +16,7 @@ export default function Post({ item }: Props) {
   return (
     <div
       onClick={() => router.push(`/home/post/${item.id}`)}
-      className="bg-gray-10 p-5 flex flex-col gap-4 max-h-[160px] max-w-[304px] w-full rounded-lg cursor-pointer overflow-hidden"
+      className="bg-gray-10 p-5 flex flex-col gap-4 max-w-[304px] w-full rounded-lg cursor-pointer overflow-hidden"
     >
       <div className="flex gap-6 justify-between">
         <div className="flex gap-4 overflow-hidden">
@@ -34,9 +35,15 @@ export default function Post({ item }: Props) {
         <div className="text-gray-30 text-[10px]">{dayjs(item?.updatedAt).fromNow()}</div>
       </div>
       <div
-        className="text-xs truncate whitespace-pre-wrap"
+        className="text-xs truncate whitespace-pre-wrap max-h-[54px] h-full"
         dangerouslySetInnerHTML={{ __html: item?.description }}
       ></div>
+
+      <div className="w-full flex justify-end">
+        <span className="flex gap-1 text-xs text-gray-30">
+          <MessagesSquare size={16} className="" /> <span>{item._count.comments}</span>
+        </span>
+      </div>
     </div>
   );
 }

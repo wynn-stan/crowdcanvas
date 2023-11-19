@@ -29,6 +29,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
       include: {
         author: true,
         comments: id ? true : false,
+        _count: {
+          select: { comments: true },
+        },
       },
     });
 

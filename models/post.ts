@@ -8,4 +8,7 @@ export interface PostModel {
   title: string;
   description: string;
   author?: UserModel;
+  _count: {
+    comments: number;
+  };
 }
