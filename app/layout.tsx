@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 import Sidebar from "./components/Sidebar/Index";
 import Providers from "../Providers/Providers";
+import StyledComponentsRegistry from "./registry";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,12 +24,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Providers>
-          <Sidebar />
-          {children}
+        <StyledComponentsRegistry>
+          <Providers>
+            <Sidebar />
+            {children}
 
-          <ToastContainer autoClose={5000} hideProgressBar />
-        </Providers>
+            <ToastContainer autoClose={5000} hideProgressBar />
+          </Providers>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
