@@ -26,13 +26,14 @@ export default function CommentForm({
     <Formik
       validateOnMount
       initialValues={{ content: "" }}
-      onSubmit={({ content }, { setSubmitting }) => {
+      onSubmit={({ content }, { setSubmitting, resetForm }) => {
         post_id &&
           user &&
           addCommentService({ content, created_for: post_id, created_by: user.id })
             .then((data) => {
               mutate();
               mutatePost();
+              resetForm();
               toast.success("Success");
             })
             .catch((err) => console.log(err))
