@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState, Dispatch, SetStateAction } from "react";
-import { Home, LucideIcon, Settings } from "lucide-react";
+import { CalendarDays, Home, LucideIcon, Settings } from "lucide-react";
 
 import { UserContext } from "../../../../Contexts/user";
 
@@ -21,7 +21,13 @@ interface ChildrenProps {
 }
 
 interface Props {
-  children: ({ user, setUser, activeTab, setActiveTab, tabItems }: ChildrenProps) => JSX.Element;
+  children: ({
+    user,
+    setUser,
+    activeTab,
+    setActiveTab,
+    tabItems,
+  }: ChildrenProps) => JSX.Element;
 }
 
 export default function Wrapper({ children }: Props) {
@@ -36,10 +42,10 @@ export default function Wrapper({ children }: Props) {
       label: "Home",
       Icon: Home,
     },
-    // settings: {
-    //   label: "Settings",
-    //   Icon: Settings,
-    // },
+    events: {
+      label: "Events",
+      Icon: CalendarDays,
+    },
   };
 
   return <>{children({ activeTab, setActiveTab, setUser, tabItems, user })}</>;

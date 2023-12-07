@@ -23,7 +23,10 @@ export default function LogInForm({ onHide }: Props) {
     <Formik
       validateOnMount
       validationSchema={yup.object({
-        email: yup.string().matches(emailRegex, "Enter a vailid email").required(),
+        email: yup
+          .string()
+          .matches(emailRegex, "Enter a vailid email")
+          .required(),
         password: yup.string().required("Password is required"),
       })}
       initialValues={{
@@ -39,11 +42,13 @@ export default function LogInForm({ onHide }: Props) {
           .then(({ data }: { data: { user: UserModel } }) => {
             setUser(data.user);
             onHide();
-            setSubmitting(false);
             toast.success("success");
           })
           .catch((error) => {
             toast.error(error?.response?.data?.message);
+          })
+          .finally(() => {
+            setSubmitting(false);
           });
       }}
     >
@@ -67,7 +72,15 @@ export default function LogInForm({ onHide }: Props) {
   );
 }
 
-function InputField({ label, name, type }: { label: string; name: string; type?: string }) {
+function InputField({
+  label,
+  name,
+  type,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-[13px] font-medium" htmlFor={name}>

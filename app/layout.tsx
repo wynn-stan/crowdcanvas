@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import ReactGA from "react-ga4";
 import { ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
+
+import "react-toastify/dist/ReactToastify.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 import Sidebar from "./components/Sidebar/Index";
 import Providers from "../Providers/Providers";
 import StyledComponentsRegistry from "./registry";
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "CrowdCanvas",
@@ -16,7 +18,11 @@ export const metadata: Metadata = {
     "CrowdCanvas is a dynamic communicty Where ideas meet, and voices resonate. Be part of the creative flow",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>

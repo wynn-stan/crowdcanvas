@@ -25,9 +25,14 @@ export default function RegisterForm({ onHide }: Props) {
       validationSchema={yup.object({
         first_name: yup.string().required("First name is required"),
         last_name: yup.string().required("Last name is required"),
-        email: yup.string().matches(emailRegex, "Enter a vailid email").required(),
+        email: yup
+          .string()
+          .matches(emailRegex, "Enter a vailid email")
+          .required(),
         password: yup.string().required("Password is required"),
-        confirm_password: yup.string().oneOf([yup.ref("password")], "Passwords must match"),
+        confirm_password: yup
+          .string()
+          .oneOf([yup.ref("password")], "Passwords must match"),
       })}
       initialValues={{
         first_name: "",
@@ -42,26 +47,47 @@ export default function RegisterForm({ onHide }: Props) {
           .then(({ data }: { data: { user: UserModel } }) => {
             setUser(data.user);
             onHide();
-            setSubmitting(false);
             toast.success("Success");
           })
           .catch((error) => {
             toast.error(error?.response?.data?.message);
-          });
+          })
+          .finally(() => setSubmitting(false));
       }}
     >
-      {({ values, handleSubmit, isSubmitting, isValid, setFieldValue, errors }) => (
+      {({
+        values,
+        handleSubmit,
+        isSubmitting,
+        isValid,
+        setFieldValue,
+        errors,
+      }) => (
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-col gap-7">
             <div className="flex flex-col sm:flex-row gap-7 sm:gap-9">
-              <InputField name="first_name" label="First Name" errors={errors} />
+              <InputField
+                name="first_name"
+                label="First Name"
+                errors={errors}
+              />
               <InputField name="last_name" label="Last Name" errors={errors} />
             </div>
 
-            <InputField type="email" label="Email" name="email" errors={errors} />
+            <InputField
+              type="email"
+              label="Email"
+              name="email"
+              errors={errors}
+            />
 
             <div className="flex flex-col sm:flex-row gap-7 sm:gap-9">
-              <InputField type="password" label="Password" name="password" errors={errors} />
+              <InputField
+                type="password"
+                label="Password"
+                name="password"
+                errors={errors}
+              />
               <InputField
                 type="password"
                 label="Confirm password"

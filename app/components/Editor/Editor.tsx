@@ -10,6 +10,7 @@ import * as yup from "yup";
 
 import Toolbar from "./Toolbar";
 import Nav from "./Nav";
+import { Container } from "../index";
 
 export interface EditorForm {
   title: string;
@@ -66,12 +67,11 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
   if (!editor) return null;
 
   return (
-    <div className="flex flex-col w-full">
-      <Nav
-        onSubmit={formik.handleSubmit}
-        {...{ isSubmitting: formik.isSubmitting, isValid: formik.isValid }}
-      />
-
+    <Container.CreatorWrapper
+      onSubmit={formik.handleSubmit}
+      isSubmitting={formik.isSubmitting}
+      isValid={formik.isValid}
+    >
       <Toolbar editor={editor} />
 
       <div className="w-full h-full flex flex-col items-center px-5">
@@ -87,7 +87,7 @@ export default function Editor({ onSubmit, defaultValues }: Props) {
           <EditorContent editor={editor} />
         </StyledEditor>
       </div>
-    </div>
+    </Container.CreatorWrapper>
   );
 }
 

@@ -37,16 +37,31 @@ model post {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  post_type String   @default("post")
 
   comments comment[]
+  event    event?
 
   @@index([post_by])
 }
 
+model event {
+  id           String @id @default(uuid())
+  post         post   @relation(fields: [related_post], references: [id], onDelete: Cascade)
+  related_post String @unique
+
+  event_type String
+  address    String
+
+  start_date DateTime
+  end_date   DateTime
+}
+
 model comment {
-  id          String @id @default(uuid())
-  author      user   @relation(fields: [created_by], references: [id])
-  reference   post   @relation(fields: [created_for], references: [id])
+  id        String @id @default(uuid())
+  author    user   @relation(fields: [created_by], references: [id])
+  reference post   @relation(fields: [created_for], references: [id])
+
   created_by  String
   created_for String
 

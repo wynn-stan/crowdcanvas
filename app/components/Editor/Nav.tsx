@@ -14,20 +14,25 @@ export default function Nav({
   const router = useRouter();
 
   //functions
-  const goToDashboard = () => router.push("/");
+  const goBack = () => router.back();
 
   return (
     <div className="flex items-center justify-between py-3 px-8">
-      <div className="cursor-pointer" onClick={goToDashboard}>
+      <div className="cursor-pointer" onClick={goBack}>
         <ArrowLeftIcon />
       </div>
       <div className="flex gap-6">
-        <Button className="py-2 px-5 border border-blue text-blue rounded" onClick={goToDashboard}>
+        <Button
+          className="py-2 px-5 border border-blue text-blue rounded"
+          onClick={goBack}
+        >
           Cancel
         </Button>
         <Button
           disabled={!isValid}
-          className={`py-2 px-5 bg-blue text-white rounded ${!isValid ? "bg-blue-20" : ""}`}
+          className={`py-2 px-5 bg-blue text-white rounded ${
+            !isValid ? "bg-blue-20" : ""
+          }`}
           onClick={onSubmit}
         >
           {isSubmitting ? <LoaderIcon /> : "Publish"}

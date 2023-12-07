@@ -39,18 +39,22 @@ export default function CommentItem({
   return (
     <div className="flex gap-4 justify-between">
       <div className="flex gap-4">
-        <img
-          src={comment.author?.profile_image_url}
-          className="rounded-full"
-          alt="img"
-          width={40}
-          height={40}
-        />
+        <div className="min-w-[40px]">
+          <img
+            src={comment.author?.profile_image_url}
+            className="rounded-full"
+            alt="img"
+            width={40}
+            height={40}
+          />
+        </div>
         <div className="flex flex-col gap-2 ">
           <div className="flex items-center">
             <span className="text-xs">{comment.author?.first_name}</span>
             <Dot />
-            <span className="text-xs text-gray-30">{dayjs(comment.updatedAt).fromNow()}</span>
+            <span className="text-xs text-gray-30">
+              {dayjs(comment.updatedAt).fromNow()}
+            </span>
           </div>
           <div className="text-sm text-gray-50">{comment.content}</div>
         </div>

@@ -10,6 +10,7 @@ export async function POST(req: Request, res: Response) {
         title,
         description,
         post_by,
+        post_type: "post",
       },
     });
     return successRes({ message: "OK" });
@@ -26,7 +27,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       where: {
         id: id ? id : undefined,
       },
-      orderBy: [{ createdAt: "desc" }],
+      orderBy: [{ createdAt: "desc" }, { event: { start_date: "desc" } }],
       include: {
         author: {
           select: {
@@ -35,6 +36,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
             last_name: true,
           },
         },
+        event: true,
         comments: id ? true : false,
         _count: {
           select: { comments: true },
