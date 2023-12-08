@@ -21,7 +21,7 @@ export default function CollapsedSidebar() {
           <Menu />
         </label>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-[9999999]">
         <CloseSideBar />
         <Wrapper>
           {({ activeTab, setActiveTab, setUser, tabItems, user }) => (

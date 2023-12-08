@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader } from "@/app/components";
 import Editor, { EditorForm } from "@/app/components/Editor/Editor";
 import { PostModel } from "@/models";
 import { updatePostService } from "@/services/post";
@@ -30,8 +31,14 @@ export default function Page() {
         mutate();
         router.push(`/home/post/${id}`);
       })
-      .catch((err) => toast.error("Something unexpected happened. Please try again"));
+      .catch((err) =>
+        toast.error("Something unexpected happened. Please try again")
+      );
   };
 
-  return post ? <Editor onSubmit={handleSubmit} defaultValues={post} /> : <>Loading...</>;
+  return post ? (
+    <Editor onSubmit={handleSubmit} defaultValues={post} />
+  ) : (
+    <Loader size="lg" />
+  );
 }

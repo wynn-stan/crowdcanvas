@@ -41,6 +41,7 @@ export default function Form({
   return (
     <Formik
       enableReinitialize
+      validateOnMount
       validationSchema={yup.object({
         title: yup.string().required("Title"),
         description: yup.string().required("Description"),
@@ -51,7 +52,7 @@ export default function Form({
       })}
       initialValues={{
         title: post?.title || "",
-        description: post?.description || "",
+        description: post?.description || "Your description here...",
         start_date,
         end_date,
         event_type: post?.event?.event_type || "In-Person",

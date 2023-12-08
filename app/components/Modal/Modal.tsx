@@ -25,7 +25,7 @@ export default function Modal({
           className="fixed inset-0 bg-black/30 z-[300] backdrop-blur"
         />
       )}
-      className={`fixed z-[301] top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white shadow-lg overflow-auto h-full ${modalClassName}`}
+      className={`fixed z-[301] top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white shadow-lg overflow-auto rounded-xl ${modalClassName}`}
     >
       <>{children}</>
     </RestartModal>

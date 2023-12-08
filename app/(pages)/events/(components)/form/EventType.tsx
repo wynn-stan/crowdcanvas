@@ -5,6 +5,7 @@ import { FormValues, SubComponentProps } from "./Index";
 import styled from "styled-components";
 import { HTMLAttributes } from "react";
 import { useFormikContext } from "formik";
+import { Globe, MapPin } from "lucide-react";
 
 export default function EventType() {
   //hooks
@@ -30,13 +31,13 @@ export default function EventType() {
       </Field.Group>
 
       {values.event_type === "In-Person" && (
-        <Field.Group name="address" label="Location">
+        <Field.Group name="address" label="Location" LabelIcon={MapPin}>
           <Field.Input name="address" placeholder="eg. Oxford Street, Osu" />
         </Field.Group>
       )}
 
       {values.event_type === "Virtual" && (
-        <Field.Group name="address" label="Url">
+        <Field.Group name="address" label="Url" LabelIcon={Globe}>
           <Field.Input
             name="address"
             placeholder="eg. https://meet.google.com/"

@@ -4,6 +4,7 @@ import { useContext, useState, Dispatch, SetStateAction } from "react";
 import { CalendarDays, Home, LucideIcon, Settings } from "lucide-react";
 
 import { UserContext } from "../../../../Contexts/user";
+import { usePathname } from "next/navigation";
 
 interface TabItems {
   [key: string]: {
@@ -34,8 +35,11 @@ export default function Wrapper({ children }: Props) {
   //context
   const { user, setUser } = useContext(UserContext);
 
+  //hooks
+  const activePath = usePathname().split("/")[1];
+
   //tabs
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState(activePath || "home");
 
   const tabItems: TabItems = {
     home: {

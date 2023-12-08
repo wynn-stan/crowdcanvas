@@ -1,3 +1,5 @@
+"use client";
+
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import styled from "styled-components";
 
@@ -14,6 +16,10 @@ export default function DatePicker({
 
 const StyledDatePicker = styled.div<{ withBorder: boolean }>`
   text-align: center;
+
+  & .react-datepicker-popper {
+    z-index: 0;
+  }
 
   & .react-datepicker__day--outside-month {
     visibility: hidden;

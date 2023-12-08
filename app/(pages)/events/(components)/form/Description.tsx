@@ -39,7 +39,7 @@ export default function Description() {
     <Field.Group label="Description" name="description" className="h-full">
       <Field.Wrapper className="!p-0 h-full">
         <Toolbar editor={editor} />
-        <div className="px-5 py-8">
+        <div className="px-5 py-8 h-full">
           <EditorContent editor={editor} />
         </div>
       </Field.Wrapper>

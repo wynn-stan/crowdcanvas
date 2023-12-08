@@ -22,7 +22,7 @@ export default function Content({ post }: { post?: PostModel }) {
           {post?.post_type === "event" && (
             <Meta item={post} truncateAddress={false}>
               {isPastEvent && (
-                <Button className="!bg-blue flex items-center !py-1 !px-3 !rounded-md">
+                <Button className="!bg-blue flextext-white items-center !py-1 !px-3 !rounded-md">
                   <Ban size={16} color="white" />
                   <span>Past event</span>
                 </Button>

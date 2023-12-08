@@ -3,6 +3,7 @@
 import { Field } from "@/app/components";
 import { type FormValues } from "./Index";
 import { useFormikContext } from "formik";
+import { CalendarDays, Clock3 } from "lucide-react";
 
 export default function DateTime() {
   const { values, setFieldValue, errors } = useFormikContext<FormValues>();
@@ -11,7 +12,7 @@ export default function DateTime() {
 
   return (
     <div className="flex flex-wrap gap-9">
-      <Field.Group name="start_date" label="Date">
+      <Field.Group name="start_date" label="Date" LabelIcon={CalendarDays}>
         <Field.Wrapper>
           <Field.DatePicker
             selected={values.start_date}
@@ -26,7 +27,7 @@ export default function DateTime() {
         </Field.Wrapper>
       </Field.Group>
 
-      <Field.Group name="start_date" label="Time">
+      <Field.Group name="start_date" label="Time" LabelIcon={Clock3}>
         <div className="flex items-center gap-2  w-full">
           <Field.Wrapper>
             <Field.DatePicker

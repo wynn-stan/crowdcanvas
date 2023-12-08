@@ -26,7 +26,9 @@ export default function Event({ event }: { event: PostModel }) {
         </span>
       </div>
 
-      <div className="h-full border-2"></div>
+      <div className="flex flex-col">
+        <div className="h-full border-2 "></div>
+      </div>
 
       <div className="flex flex-col gap-3">
         <div className="line-clamp-2 font-medium text-base">{event.title}</div>

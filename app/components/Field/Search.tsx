@@ -1,3 +1,5 @@
+"use client";
+
 import { HTMLAttributes } from "react";
 import Wrapper from "./Wrapper";
 import { ISetFieldValue } from "@/interfaces";

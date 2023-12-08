@@ -11,6 +11,7 @@ import { emailRegex } from "../../../../utils";
 import { UserContext } from "../../../../Contexts/user";
 import { UserModel } from "../../../../models";
 import { Loader } from "lucide-react";
+import Button from "../../Button/Button";
 
 interface Props {
   onHide: () => void;
@@ -60,12 +61,13 @@ export default function LogInForm({ onHide }: Props) {
             <InputField type="password" label="Password" name="password" />
           </div>
 
-          <button
+          <Button
             onClick={() => handleSubmit()}
-            className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
+            className="!mt-8 !px-[60px] !py-[12px] !bg-blue-10 text-white !rounded !font-medium"
+            {...{ isSubmitting, isValid }}
           >
-            {isSubmitting ? <Loader /> : "Log in"}
-          </button>
+            Log in
+          </Button>
         </form>
       )}
     </Formik>

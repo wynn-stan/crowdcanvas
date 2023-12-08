@@ -11,6 +11,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { UserModel } from "@/models";
 import { Loader } from "lucide-react";
+import Button from "../../Button/Button";
 
 interface Props {
   onHide: () => void;
@@ -96,12 +97,13 @@ export default function RegisterForm({ onHide }: Props) {
               />
             </div>
           </div>
-          <button
+          <Button
             onClick={() => handleSubmit()}
-            className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
+            className="!mt-8 !px-[60px] !py-[12px] !bg-blue-10 text-white !rounded !font-medium"
+            {...{ isSubmitting, isValid }}
           >
-            {isSubmitting ? <Loader /> : "Create account"}
-          </button>
+            Create account
+          </Button>
         </form>
       )}
     </Formik>

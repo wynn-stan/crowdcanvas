@@ -6,6 +6,7 @@ import Script from "next/script";
 
 import "react-toastify/dist/ReactToastify.css";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import Sidebar from "./components/Sidebar/Index";
 import Providers from "../Providers/Providers";

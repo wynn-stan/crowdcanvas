@@ -7,13 +7,15 @@ function Meta({
   item,
   children,
   truncateAddress = true,
+  className,
+  ...props
 }: {
   item: PostModel;
   children?: React.ReactNode;
   truncateAddress?: boolean;
-}) {
+} & HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className="flex flex-wrap gap-3 text-xs">
+    <div className={`flex flex-wrap gap-3 text-xs ${className}`} {...props}>
       {item.event?.event_type === "In-Person" && (
         <Item Icon={MapPin}>
           <div className={`${truncateAddress && "md:max-w-[90px] truncate"}`}>
