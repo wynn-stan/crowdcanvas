@@ -8,8 +8,8 @@ const routes = {
     },
   },
   events: {
-    index: "/events",
-    detail: "/events/[id]",
+    index: "/events/explore",
+    detail: "/events/explore/[id]",
     create: "/events/create",
     edit: "/events/edit/[id]",
   },

@@ -1,18 +1,19 @@
 "use client";
 
 import { Field } from "@/app/components";
-import DatePicker from "react-datepicker";
-import { type FormValues } from "../../create/page";
+import { type FormValues } from "./Index";
 import { useFormikContext } from "formik";
 
 export default function DateTime() {
-  const { values, setFieldValue } = useFormikContext<FormValues>();
+  const { values, setFieldValue, errors } = useFormikContext<FormValues>();
+
+  console.log(errors);
 
   return (
     <div className="flex flex-wrap gap-9">
       <Field.Group name="start_date" label="Date">
         <Field.Wrapper>
-          <DatePicker
+          <Field.DatePicker
             selected={values.start_date}
             onChange={(date) => {
               setFieldValue("start_date", date);
@@ -20,6 +21,7 @@ export default function DateTime() {
             }}
             dateFormat="dd-MMM-yyyy"
             className="outline-none w-full"
+            withBorder
           />
         </Field.Wrapper>
       </Field.Group>
@@ -27,7 +29,7 @@ export default function DateTime() {
       <Field.Group name="start_date" label="Time">
         <div className="flex items-center gap-2  w-full">
           <Field.Wrapper>
-            <DatePicker
+            <Field.DatePicker
               selected={values.start_date}
               onChange={(date) => setFieldValue("start_date", date)}
               className="outline-none w-full"
@@ -36,13 +38,14 @@ export default function DateTime() {
               timeIntervals={15}
               timeCaption="Time"
               dateFormat="h:mm aa"
+              withBorder
             />
           </Field.Wrapper>
 
           <div>-</div>
 
           <Field.Wrapper>
-            <DatePicker
+            <Field.DatePicker
               selected={values.end_date}
               onChange={(date) => setFieldValue("end_date", date)}
               className="outline-none w-full"
@@ -51,6 +54,7 @@ export default function DateTime() {
               timeIntervals={15}
               timeCaption="Time"
               dateFormat="h:mm aa"
+              withBorder
             />
           </Field.Wrapper>
         </div>

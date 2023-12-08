@@ -39,6 +39,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
             profile_image_url: true,
           },
         },
+        event: true,
         comments: true,
       },
     });

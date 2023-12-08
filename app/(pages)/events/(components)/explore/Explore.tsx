@@ -1,15 +1,13 @@
 "use client";
 
-import { Container } from "@/app/components";
-import Button from "@/app/components/Button/Button";
-import routes from "@/routes";
+import { Container, Field } from "@/app/components";
+
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import styled from "styled-components";
-import Upcoming from "./Upcoming";
 import { Formik, useFormik } from "formik";
+import styled from "styled-components";
 import * as yup from "yup";
+
+import Upcoming from "./Upcoming";
 
 export interface FormInterface {
   start_date: Date;
@@ -37,14 +35,11 @@ export default function Explore() {
         {({ values, setFieldValue }) => (
           <>
             <div className="flex flex-col flex-wrap lg:flex-row gap-12">
-              <StyledDatePicker>
-                <DatePicker
-                  selected={values.start_date}
-                  onChange={(date) => setFieldValue("start_date", date)}
-                  inline
-                />
-              </StyledDatePicker>
-
+              <Field.DatePicker
+                selected={values.start_date}
+                onChange={(date) => setFieldValue("start_date", date)}
+                inline
+              />
               <Upcoming />
             </div>
           </>
@@ -53,9 +48,3 @@ export default function Explore() {
     </Container>
   );
 }
-
-const StyledDatePicker = styled.div`
-  & .react-datepicker__day--outside-month {
-    visibility: hidden;
-  }
-`;

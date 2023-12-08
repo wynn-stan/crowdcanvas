@@ -26,7 +26,7 @@ export default function Container({
   const isMobile = width <= 480;
 
   return (
-    <StyledContainer endRoute={endRoute} className="py-[50px] px-12">
+    <StyledContainer endRoute={endRoute} className="py-[50px] px-12 w-full">
       <div className="flex flex-col gap-14">
         <div className="flex justify-between items-center">
           {isMobile && (
@@ -78,13 +78,13 @@ const StyledContainer = styled.main<{ endRoute?: string }>`
 
   @media (max-width: 1024px) {
     display: ${({ endRoute }) =>
-      ["home", "events"].includes(endRoute || "") ? "block" : "none"};
+      ["home", "explore"].includes(endRoute || "") ? "block" : "none"};
   }
 
   @media (min-width: 1025px) {
     min-width: ${({ endRoute }) =>
-      ["home", "events"].includes(endRoute || "") ? "100%" : "418px"};
+      ["home", "explore"].includes(endRoute || "") ? "100%" : "418px"};
     max-width: ${({ endRoute }) =>
-      ["home", "events"].includes(endRoute || "") ? "100%" : "418px"};
+      ["home", "explore"].includes(endRoute || "") ? "100%" : "418px"};
   }
 `;

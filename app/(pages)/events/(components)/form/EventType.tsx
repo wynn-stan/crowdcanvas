@@ -1,7 +1,7 @@
 "use client";
 
 import { Field } from "@/app/components";
-import { FormValues, SubComponentProps } from "../../create/page";
+import { FormValues, SubComponentProps } from "./Index";
 import styled from "styled-components";
 import { HTMLAttributes } from "react";
 import { useFormikContext } from "formik";

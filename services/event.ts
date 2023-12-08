@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface AddEventPayload {
+interface EventPayload {
   title: string;
   description: string;
   post_by: string;
@@ -10,5 +10,10 @@ interface AddEventPayload {
   end_date: Date;
 }
 
-export const addEventService = (payload: AddEventPayload) =>
+export const addEventService = (payload: EventPayload) =>
   axios.post("/api/events", payload);
+
+export const updateEventService = (
+  event_id: string,
+  payload: { post_id: string } & Omit<EventPayload, "post_by">
+) => axios.put(`/api/events/${event_id}`, payload);

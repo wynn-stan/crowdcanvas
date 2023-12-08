@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useFormikContext } from "formik";
-import { FormValues } from "../../create/page";
+import { FormValues } from "./Index";
 
 export default function Description() {
   //hooks

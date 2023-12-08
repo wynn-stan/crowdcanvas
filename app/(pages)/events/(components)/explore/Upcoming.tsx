@@ -1,18 +1,18 @@
 "use client";
 
-import { Field } from "@/app/components";
 import Button from "@/app/components/Button/Button";
-import { ISetFieldValue } from "@/interfaces";
-import { useFormikContext } from "formik";
-import { Globe, MapPin, Plus } from "lucide-react";
-import { FormInterface } from "./Explore";
-import useSWR from "swr";
-import queryString from "query-string";
-import { EventModel, PostModel } from "@/models";
-import dayjs from "dayjs";
-import styled from "styled-components";
-import { useRouter } from "next/navigation";
+import { PostModel } from "@/models";
+import { Field } from "@/app/components";
 import routes from "@/routes";
+
+import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useFormikContext } from "formik";
+import queryString from "query-string";
+import useSWR from "swr";
+
+import { FormInterface } from "./Explore";
+import Category from "./Upcoming/Category";
 
 export default function Upcoming() {
   //hooks
@@ -20,7 +20,7 @@ export default function Upcoming() {
   const router = useRouter();
 
   //api
-  const { data, error } = useSWR<{ category: string; events: EventModel[] }[]>(
+  const { data, error } = useSWR<{ category: string; events: PostModel[] }[]>(
     `/api/events?${queryString.stringify({
       start_date: values.start_date,
       search: values.search,
@@ -57,61 +57,3 @@ export default function Upcoming() {
     </div>
   );
 }
-
-function Category({
-  category,
-  events,
-}: {
-  category: string;
-  events: PostModel[];
-}) {
-  return (
-    <div className="flex flex-col gap-5">
-      <div className="text-base font-medium">
-        {dayjs(category).format("ddd, MMMM D YYYY")}
-      </div>
-      <div className="flex flex-col gap-4">
-        {events.map((event, index) => (
-          <Event event={event} key={index} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Event({ event }: { event: PostModel }) {
-  const router = useRouter();
-
-  return (
-    <StyledEvent
-      onClick={() =>
-        router.push(routes.events.detail.replace("[id]", event.id))
-      }
-      className="flex gap-5 rounded-md py-8 px-6 cursor-pointer"
-    >
-      <div className="flex flex-col gap-3">
-        <span className="font-semibold text-2xl">
-          {dayjs(event?.event?.start_date).format("h:mm A")}
-        </span>
-        <span className="font-medium text-sm text-gray-30">
-          {dayjs(event?.event?.end_date).format("h:mm A")}
-        </span>
-      </div>
-
-      <div className="h-full border-2"></div>
-
-      <div className="flex flex-col gap-3">
-        <div className="line-clamp-2 font-medium text-base">{event.title}</div>
-        <div className="flex gap-1 items-center text-gray-30">
-          {event.event?.event_type === "In-Person" && <MapPin size={20} />}
-          {event.event?.event_type === "Virtual" && <Globe size={20} />}
-          <div className="text-xs font-medium ">{event.event?.address}</div>
-        </div>
-      </div>
-    </StyledEvent>
-  );
-}
-
-const StyledEvent = styled.div`
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-`;

@@ -7,7 +7,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     const id = req.nextUrl.pathname.split("/").slice(-1)[0];
     const {
       post_id,
-      event_id,
       title,
       description,
       event_type,
@@ -33,12 +32,12 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         start_date,
         end_date,
       },
-      where: { id: event_id },
+      where: { id },
     });
 
     return successRes({ post, event });
   } catch (err) {
-    return errorRes;
+    return errorRes({ err });
   }
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/app/components/Button/Button";
+import Meta from "@/app/components/Post/Meta";
 import { EventModel, PostModel } from "@/models";
 import routes from "@/routes";
 import dayjs from "dayjs";
@@ -31,7 +32,7 @@ export default function Post({ item }: Props) {
   const comment_count = item._count.comments;
 
   const diff = dayjs(new Date()).diff(item.createdAt, "hour");
-  const isHot = diff < 12;
+  const isHot = diff < 5;
 
   const hasMeta = comment_count > 0 || item.post_type === "event";
 
@@ -86,46 +87,15 @@ export default function Post({ item }: Props) {
       </div>
 
       {hasMeta && (
-        <div className="border-t py-5 px-7 flex flex-wrap gap-3 text-xs p">
-          {item.post_type === "event" && (
-            <>
-              {item.event?.event_type === "In-Person" && (
-                <PostMetaItem Icon={MapPin}>
-                  <div className="md:max-w-[90px] truncate">
-                    {item?.event?.address}{" "}
-                  </div>
-                </PostMetaItem>
-              )}
-
-              {item.event?.event_type === "Virtual" && (
-                <PostMetaItem Icon={Globe}>
-                  {" "}
-                  <div className="md:max-w-[90px] truncate">
-                    {item?.event?.address}{" "}
-                  </div>
-                </PostMetaItem>
-              )}
-
-              <PostMetaItem Icon={CalendarDays}>
-                {dayjs(item?.event?.start_date).format("ddd, D MMM YYYY")}
-              </PostMetaItem>
-
-              <PostMetaItem Icon={Clock3}>
-                <div className="flex gap-1">
-                  {dayjs(item?.event?.start_date).format("h:mm A")}
-                  <span>-</span>
-                  {dayjs(item?.event?.end_date).format("h:mm A")}
-                </div>
-              </PostMetaItem>
-            </>
-          )}
+        <div className="border-t py-5 px-7 flex flex-wrap gap-3 text-xs">
+          <Meta item={item} />
 
           {comment_count > 0 ? (
-            <PostMetaItem Icon={MessageCircle}>
+            <Meta.Item Icon={MessageCircle}>
               {`${
                 comment_count > 1 ? `${comment_count} comments` : "1 comment"
               }`}
-            </PostMetaItem>
+            </Meta.Item>
           ) : (
             <></>
           )}
@@ -139,22 +109,6 @@ export default function Post({ item }: Props) {
         </div>
       )}
     </StyledContainer>
-  );
-}
-
-function PostMetaItem({
-  Icon,
-  children,
-  ...props
-}: {
-  Icon: any;
-  children: React.ReactNode;
-} & HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={`flex gap-1 items-center text-gray-30`} {...props}>
-      <Icon size={20} />
-      <div className="text-black font-medium">{children}</div>
-    </div>
   );
 }
 
