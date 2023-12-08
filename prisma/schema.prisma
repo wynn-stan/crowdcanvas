@@ -55,6 +55,8 @@ model event {
 
   start_date DateTime
   end_date   DateTime
+
+  @@index([related_post])
 }
 
 model comment {
