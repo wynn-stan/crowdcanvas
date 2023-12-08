@@ -1,37 +1,5 @@
-"use client";
-
-import useSWR from "swr";
-import CommentSection from "./(components)/CommentSection";
-import PostAction from "./(components)/PostActions";
-import PostContent from "./(components)/PostContent";
-import { PostModel } from "@/models";
-import queryString from "query-string";
-import { usePathname } from "next/navigation";
+import Post from "@/app/components/Post";
 
 export default function Page() {
-  //path
-  const id = usePathname().split("/").slice(-1)[0];
-
-  //api
-  const { data, error, mutate } = useSWR<PostModel[]>(
-    `/api/posts?${queryString.stringify({
-      id,
-    })}`
-  );
-
-  const post = data?.[0];
-
-  return (
-    <div className="w-full p-10 border-l-2 border-gray-10 min-h-screen md:h-screen md:overflow-auto">
-      <div className="flex flex-col gap-12 h-full justify-between">
-        <div className="flex flex-col gap-12">
-          <PostAction post={post} />
-
-          <PostContent post={post} />
-        </div>
-
-        <CommentSection post={post} mutate={mutate} />
-      </div>
-    </div>
-  );
+  return <Post.Detail />;
 }

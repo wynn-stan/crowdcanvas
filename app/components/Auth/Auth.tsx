@@ -35,7 +35,7 @@ export default function Auth({ children }: Props) {
       <Modal
         show={show}
         onHide={onHide}
-        modalClassName="!w-full !max-w-[760px] h-fit min-h-[652px]"
+        modalClassName="!w-full !max-w-[760px] h-fit min-h-[652px] max-h-full overflow-auto"
       >
         <div
           className="w-full py-6 md:px-[95px] xs:px-[36px] flex justify-end cursor-pointer"
@@ -46,19 +46,25 @@ export default function Auth({ children }: Props) {
         <StyledWrapper>
           <div className="flex flex-col gap-4">
             <div className="text-4xl font-medium">Welcome to CrowdCanvas</div>
-            <div className="text-sm text-[#7F7F7F]" style={{ lineHeight: "31px" }}>
-              Where ideas meet, and voices resonate. Join our dynamic community and be part of the
-              creative flow
+            <div
+              className="text-sm text-[#7F7F7F]"
+              style={{ lineHeight: "31px" }}
+            >
+              Where ideas meet, and voices resonate. Join our dynamic community
+              and be part of the creative flow
             </div>
           </div>
 
-          <div>
+          <div className="mb-10">
             {view === "register" && (
               <>
                 <RegisterForm onHide={onHide} />
                 <div className="mt-5">
                   Already have an account?{" "}
-                  <span className="cursor-pointer" onClick={() => setView("log_in")}>
+                  <span
+                    className="cursor-pointer underline"
+                    onClick={() => setView("log_in")}
+                  >
                     Log in.
                   </span>
                 </div>
@@ -69,7 +75,10 @@ export default function Auth({ children }: Props) {
                 <LogInForm onHide={onHide} />
                 <div className="mt-5">
                   Don’t have an account?{" "}
-                  <span className="cursor-pointer" onClick={() => setView("register")}>
+                  <span
+                    className="cursor-pointer underline"
+                    onClick={() => setView("register")}
+                  >
                     Sign up
                   </span>
                 </div>

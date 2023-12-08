@@ -7,7 +7,7 @@ export default function ToHome({ children }: { children?: React.ReactNode }) {
   const router = useRouter();
 
   return (
-    <div onClick={() => router.push("/home")} className="cursor-pointer">
+    <div onClick={() => router.back()} className="cursor-pointer">
       {children ? <>{children}</> : <X />}
     </div>
   );

@@ -11,4 +11,15 @@ export interface PostModel {
   _count: {
     comments: number;
   };
+  post_type: "event" | "post";
+  event?: EventModel;
+}
+
+export interface EventModel extends PostModel {
+  address: string;
+  end_date: string;
+  event_type: string;
+  id: string;
+  related_post: string;
+  start_date: string;
 }

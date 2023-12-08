@@ -50,7 +50,10 @@ export default function Toolbar({ editor }: { editor: Editor | null }) {
         Icon: LinkIcon,
         toggle: () =>
           chainer()
-            .toggleLink({ href: editor.getAttributes("link").href, target: "_blank" })
+            .toggleLink({
+              href: editor.getAttributes("link").href,
+              target: "_blank",
+            })
             .run(),
       },
     },
@@ -81,8 +84,15 @@ export default function Toolbar({ editor }: { editor: Editor | null }) {
             const Icon = group[key].Icon;
             const isActive = editor.isActive(key);
             return (
-              <span key={index} onClick={group[key].toggle} className={`${isActive && "bg-blue"}`}>
-                <Icon color={isActive ? "white" : undefined} className="cursor-pointer" />
+              <span
+                key={index}
+                onClick={group[key].toggle}
+                className={`${isActive && "bg-blue"}`}
+              >
+                <Icon
+                  color={isActive ? "white" : undefined}
+                  className="cursor-pointer"
+                />
               </span>
             );
           })}

@@ -11,6 +11,7 @@ import { emailRegex } from "../../../../utils";
 import { UserContext } from "../../../../Contexts/user";
 import { UserModel } from "../../../../models";
 import { Loader } from "lucide-react";
+import Button from "../../Button/Button";
 
 interface Props {
   onHide: () => void;
@@ -23,7 +24,10 @@ export default function LogInForm({ onHide }: Props) {
     <Formik
       validateOnMount
       validationSchema={yup.object({
-        email: yup.string().matches(emailRegex, "Enter a vailid email").required(),
+        email: yup
+          .string()
+          .matches(emailRegex, "Enter a vailid email")
+          .required(),
         password: yup.string().required("Password is required"),
       })}
       initialValues={{
@@ -39,11 +43,13 @@ export default function LogInForm({ onHide }: Props) {
           .then(({ data }: { data: { user: UserModel } }) => {
             setUser(data.user);
             onHide();
-            setSubmitting(false);
             toast.success("success");
           })
           .catch((error) => {
             toast.error(error?.response?.data?.message);
+          })
+          .finally(() => {
+            setSubmitting(false);
           });
       }}
     >
@@ -55,19 +61,28 @@ export default function LogInForm({ onHide }: Props) {
             <InputField type="password" label="Password" name="password" />
           </div>
 
-          <button
+          <Button
             onClick={() => handleSubmit()}
-            className="mt-8 px-[60px] py-[12px] bg-blue-10 text-white rounded font-medium"
+            className="!mt-8 !px-[60px] !py-[12px] !bg-blue-10 text-white !rounded !font-medium"
+            {...{ isSubmitting, isValid }}
           >
-            {isSubmitting ? <Loader /> : "Log in"}
-          </button>
+            Log in
+          </Button>
         </form>
       )}
     </Formik>
   );
 }
 
-function InputField({ label, name, type }: { label: string; name: string; type?: string }) {
+function InputField({
+  label,
+  name,
+  type,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-[13px] font-medium" htmlFor={name}>

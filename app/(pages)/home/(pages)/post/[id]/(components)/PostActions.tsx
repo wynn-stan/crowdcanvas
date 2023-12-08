@@ -25,15 +25,19 @@ export default function PostActions({ post }: { post?: PostModel }) {
     post &&
       deletePostService(post?.id)
         .then(() => {
-          router.push("/home");
+          router.back();
           toast.success("Success");
         })
-        .catch((err) => toast.error("Something unexpected happened. Please try again"));
+        .catch((err) =>
+          toast.error("Something unexpected happened. Please try again")
+        );
   };
 
   //functions (edit)
   const handleEdit = () => {
-    router.push(`/edit/${post?.id}`);
+    post?.post_type === "post"
+      ? router.push(`/edit/${post?.id}`)
+      : router.push(`/events/edit/${post?.id}`);
   };
 
   return (

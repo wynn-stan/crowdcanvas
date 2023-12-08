@@ -10,6 +10,7 @@ import useSWR from "swr";
 import CommentForm from "./(others)/CommentForm";
 import CommentItem from "./(others)/CommentItem";
 import { Dot } from "lucide-react";
+import Skeleton from "react-loading-skeleton";
 
 export default function CommentSection({
   post,
@@ -39,9 +40,17 @@ export default function CommentSection({
       <div className="flex flex-col gap-4">
         <div className="text-xl flex gap-2 items-center">
           <span>Comments</span>
-          <StyledCommentCount>{post?._count?.comments || "0"}</StyledCommentCount>
+          <StyledCommentCount>
+            {post?._count?.comments || "0"}
+          </StyledCommentCount>
         </div>
         <div className="flex flex-col gap-5">
+          {!comments &&
+            !error &&
+            Array.from({ length: 2 }, (_, i) => (
+              <Skeleton key={i} width="100%" height={58} />
+            ))}
+
           {comments?.map((comment, index) => (
             <CommentItem key={index} comment={comment} mutate={mutate} />
           ))}
@@ -51,7 +60,9 @@ export default function CommentSection({
       <div className="flex flex-col gap-4">
         <div className="text-gray-50">What do you think?</div>
         <div className="flex gap-3 mb-5">
-          {user && <StyledName className="bg-gray-20">{user.first_name[0]}</StyledName>}
+          {user && (
+            <StyledName className="bg-gray-20">{user.first_name[0]}</StyledName>
+          )}
           <CommentForm {...{ post_id: post?.id, mutate, mutatePost }} />
         </div>
       </div>

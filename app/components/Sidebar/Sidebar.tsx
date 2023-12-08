@@ -1,15 +1,23 @@
 "use client";
 
 import { useContext, useState, Dispatch, SetStateAction } from "react";
-import { Home, LucideIcon, Settings, LogIn, Plus } from "lucide-react";
+import {
+  Home,
+  LucideIcon,
+  Settings,
+  LogIn,
+  Plus,
+  CalendarDays,
+} from "lucide-react";
 import styled from "styled-components";
 import { useWindowWidth } from "@react-hook/window-size";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { UserContext } from "../../../Contexts/user";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import Auth from "../Auth/Auth";
+import routes from "@/routes";
 
 interface TabItems {
   [key: string]: {
@@ -27,25 +35,32 @@ interface ChildrenProps {
 }
 
 interface Props {
-  children: ({ user, setUser, activeTab, setActiveTab, tabItems }: ChildrenProps) => JSX.Element;
+  children: ({
+    user,
+    setUser,
+    activeTab,
+    setActiveTab,
+    tabItems,
+  }: ChildrenProps) => JSX.Element;
 }
 
 export default function Wrapper() {
-  //context
+  //hooks
   const { user, setUser } = useContext(UserContext);
+  const activePath = usePathname().split("/")[1];
 
   //tabs
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState(activePath);
 
   const tabItems: TabItems = {
     home: {
       label: "Home",
       Icon: Home,
     },
-    // settings: {
-    //   label: "Settings",
-    //   Icon: Settings,
-    // },
+    events: {
+      label: "Events",
+      Icon: CalendarDays,
+    },
   };
 
   //width
@@ -56,10 +71,16 @@ export default function Wrapper() {
   const router = useRouter();
 
   return (
-    <StyledSidebar data-isTablet={isTablet} className="border-r-2 border-gray-20">
+    <StyledSidebar
+      data-isTablet={isTablet}
+      className="border-r-2 border-gray-20"
+    >
       <div className="flex flex-col gap-12 ">
         {!isTablet && (
-          <div style={{ letterSpacing: "-2%" }} className="font-medium text-2xl text-center w-full">
+          <div
+            style={{ letterSpacing: "-2%" }}
+            className="font-medium text-2xl text-center w-full"
+          >
             CrowdCanvas
           </div>
         )}
@@ -72,7 +93,10 @@ export default function Wrapper() {
                   key === activeTab ? "bg-[#d9d9d9]" : ""
                 } `}
                 key={index}
-                onClick={() => setActiveTab(key)}
+                onClick={() => {
+                  setActiveTab(key);
+                  router.push((routes as any)?.[key]?.index);
+                }}
               >
                 <Icon />
                 {!isTablet && <span>{label}</span>}
@@ -84,7 +108,9 @@ export default function Wrapper() {
 
       <div className="flex justify-center">
         {user ? (
-          <Button onClick={() => router.push("/create")}>{isTablet ? <Plus /> : "New Post"}</Button>
+          <Button onClick={() => router.push("/create")}>
+            {isTablet ? <Plus /> : "New Post"}
+          </Button>
         ) : (
           <Auth>
             {({ proceed }) => (

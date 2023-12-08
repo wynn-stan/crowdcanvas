@@ -1,8 +1,9 @@
 "use client";
 
 import { Menu, PlusIcon, X } from "lucide-react";
-import styled from "styled-components";
 import { useRouter } from "next/navigation";
+import styled from "styled-components";
+import routes from "@/routes";
 
 import Wrapper from "./Wrapper/Wrapper";
 import Button from "../Button/Button";
@@ -20,7 +21,7 @@ export default function CollapsedSidebar() {
           <Menu />
         </label>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-[9999999]">
         <CloseSideBar />
         <Wrapper>
           {({ activeTab, setActiveTab, setUser, tabItems, user }) => (
@@ -44,7 +45,10 @@ export default function CollapsedSidebar() {
                           key === activeTab ? "bg-[#d9d9d9]" : ""
                         } `}
                         key={index}
-                        onClick={() => setActiveTab(key)}
+                        onClick={() => {
+                          setActiveTab(key);
+                          router.push((routes as any)?.[key]?.index);
+                        }}
                       >
                         <Icon />
                         <span>{label}</span>
