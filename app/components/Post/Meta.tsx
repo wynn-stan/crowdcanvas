@@ -19,7 +19,7 @@ function Meta({
       {item.event?.event_type === "In-Person" && (
         <Item Icon={MapPin}>
           <div
-            className={`whitespace-pre-wrap ${
+            className={`whitespace-pre-wrap line-clamp-1  ${
               truncateAddress && "md:max-w-[90px] truncate"
             }`}
           >
