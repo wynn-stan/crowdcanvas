@@ -15,10 +15,14 @@ function Meta({
   truncateAddress?: boolean;
 } & HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`flex flex-wrap gap-3 text-xs ${className}`} {...props}>
+    <div className={` flex flex-wrap gap-3 text-xs ${className}`} {...props}>
       {item.event?.event_type === "In-Person" && (
         <Item Icon={MapPin}>
-          <div className={`${truncateAddress && "md:max-w-[90px] truncate"}`}>
+          <div
+            className={`whitespace-pre-wrap ${
+              truncateAddress && "md:max-w-[90px] truncate"
+            }`}
+          >
             {item?.event?.address}{" "}
           </div>
         </Item>
@@ -26,7 +30,11 @@ function Meta({
 
       {item.event?.event_type === "Virtual" && (
         <Item Icon={Globe}>
-          <div className={`${truncateAddress && "md:max-w-[90px] truncate"}`}>
+          <div
+            className={`whitespace-pre-wrap ${
+              truncateAddress && "md:max-w-[90px] truncate"
+            }`}
+          >
             {item?.event?.address}{" "}
           </div>
         </Item>
@@ -60,7 +68,9 @@ function Item({
   return (
     <div className={`flex gap-1 items-center text-gray-30`} {...props}>
       <Icon size={20} />
-      <div className="text-black font-medium">{children}</div>
+      <div className="whitespace-pre-wrap text-black font-medium">
+        {children}
+      </div>
     </div>
   );
 }

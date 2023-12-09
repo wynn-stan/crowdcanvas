@@ -18,7 +18,7 @@ const StyledDatePicker = styled.div<{ withBorder: boolean }>`
   text-align: center;
 
   & .react-datepicker-popper {
-    z-index: 0;
+    /* z-index: 0; */
   }
 
   & .react-datepicker__day--outside-month {
