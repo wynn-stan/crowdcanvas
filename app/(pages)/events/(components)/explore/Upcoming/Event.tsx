@@ -1,7 +1,7 @@
 import { PostModel } from "@/models";
 import routes from "@/routes";
 
-import { Globe, MapPin } from "lucide-react";
+import { BellRing, Globe, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import styled from "styled-components";
@@ -10,6 +10,10 @@ export default function Event({ event }: { event: PostModel }) {
   //navigation
   const router = useRouter();
 
+  //variables
+  const diff = dayjs(new Date()).diff(event.createdAt, "hour");
+  const isHot = diff < 5;
+
   return (
     <StyledEvent
       onClick={() =>
@@ -17,6 +21,11 @@ export default function Event({ event }: { event: PostModel }) {
       }
       className="flex gap-5 rounded-md py-8 px-6 cursor-pointer"
     >
+      {isHot && (
+        <StyledHot className="flex items-center justify-center bg-red">
+          <BellRing size={8} color="white" />
+        </StyledHot>
+      )}
       <div className="flex flex-col gap-3">
         <span className="font-semibold text-2xl">
           {dayjs(event?.event?.start_date).format("h:mm A")}
@@ -43,5 +52,15 @@ export default function Event({ event }: { event: PostModel }) {
 }
 
 const StyledEvent = styled.div`
+  position: relative;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+const StyledHot = styled.div`
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
 `;
