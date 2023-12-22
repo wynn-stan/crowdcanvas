@@ -36,7 +36,7 @@ export default function DateTime() {
               className="outline-none w-full"
               showTimeSelect
               showTimeSelectOnly
-              timeIntervals={15}
+              timeIntervals={30}
               timeCaption="Time"
               dateFormat="h:mm aa"
               withBorder
@@ -52,7 +52,7 @@ export default function DateTime() {
               className="outline-none w-full"
               showTimeSelect
               showTimeSelectOnly
-              timeIntervals={15}
+              timeIntervals={30}
               timeCaption="Time"
               dateFormat="h:mm aa"
               withBorder
