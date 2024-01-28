@@ -8,6 +8,7 @@ import routes from "@/routes";
 import Wrapper from "./Wrapper/Wrapper";
 import Button from "../Button/Button";
 import Auth from "../Auth/Auth";
+import Link from "next/link";
 
 export default function CollapsedSidebar() {
   const router = useRouter();
@@ -32,7 +33,9 @@ export default function CollapsedSidebar() {
                   style={{ letterSpacing: "-2%" }}
                   className="flex justify-between font-medium text-2xl px-9"
                 >
-                  <span>CrowdCanvas</span>
+                  <Link href="/">
+                    <span>CrowdCanvas</span>
+                  </Link>
                   <CloseSideBar withIcon />
                 </div>
 
@@ -83,11 +86,7 @@ export default function CollapsedSidebar() {
 
 const CloseSideBar = ({ withIcon }: { withIcon?: boolean }) => {
   return (
-    <label
-      htmlFor="my-drawer"
-      aria-label="close sidebar"
-      className="drawer-overlay"
-    >
+    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
       {withIcon && <X />}
     </label>
   );

@@ -19,11 +19,7 @@ export const metadata: Metadata = {
     "CrowdCanvas is a dynamic communicty Where ideas meet, and voices resonate. Be part of the creative flow",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -43,7 +39,7 @@ export default function RootLayout({
         </Script>
         <StyledComponentsRegistry>
           <Providers>
-            <Sidebar />
+            {/* <Sidebar /> */}
             {children}
 
             <ToastContainer autoClose={5000} hideProgressBar />

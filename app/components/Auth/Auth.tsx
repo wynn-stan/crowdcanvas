@@ -10,17 +10,19 @@ import { X } from "lucide-react";
 import { UserContext } from "@/Contexts/user";
 import { UserModel } from "@/models";
 
+type View = "register" | "log_in";
 interface Props {
   children: (props: {
     proceed: () => void;
     onHide: () => void;
     user: UserModel | null;
   }) => React.ReactElement;
+  defaultView?: View;
 }
 
-export default function Auth({ children }: Props) {
+export default function Auth({ children, defaultView = "log_in" }: Props) {
   //state
-  const [view, setView] = useState<"register" | "log_in">("log_in");
+  const [view, setView] = useState<View>(defaultView);
   const [show, setShow] = useState(false);
 
   //functions
@@ -46,12 +48,9 @@ export default function Auth({ children }: Props) {
         <StyledWrapper>
           <div className="flex flex-col gap-4">
             <div className="text-4xl font-medium">Welcome to CrowdCanvas</div>
-            <div
-              className="text-sm text-[#7F7F7F]"
-              style={{ lineHeight: "31px" }}
-            >
-              Where ideas meet, and voices resonate. Join our dynamic community
-              and be part of the creative flow
+            <div className="text-sm text-[#7F7F7F]" style={{ lineHeight: "31px" }}>
+              Where ideas meet, and voices resonate. Join our dynamic community and be part of the creative
+              flow
             </div>
           </div>
 
@@ -61,10 +60,7 @@ export default function Auth({ children }: Props) {
                 <RegisterForm onHide={onHide} />
                 <div className="mt-5">
                   Already have an account?{" "}
-                  <span
-                    className="cursor-pointer underline"
-                    onClick={() => setView("log_in")}
-                  >
+                  <span className="cursor-pointer underline" onClick={() => setView("log_in")}>
                     Log in.
                   </span>
                 </div>
@@ -75,10 +71,7 @@ export default function Auth({ children }: Props) {
                 <LogInForm onHide={onHide} />
                 <div className="mt-5">
                   Don’t have an account?{" "}
-                  <span
-                    className="cursor-pointer underline"
-                    onClick={() => setView("register")}
-                  >
+                  <span className="cursor-pointer underline" onClick={() => setView("register")}>
                     Sign up
                   </span>
                 </div>
