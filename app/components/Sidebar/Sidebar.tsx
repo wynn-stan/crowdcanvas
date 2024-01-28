@@ -1,14 +1,7 @@
 "use client";
 
 import { useContext, useState, Dispatch, SetStateAction } from "react";
-import {
-  Home,
-  LucideIcon,
-  Settings,
-  LogIn,
-  Plus,
-  CalendarDays,
-} from "lucide-react";
+import { Home, LucideIcon, Settings, LogIn, Plus, CalendarDays } from "lucide-react";
 import styled from "styled-components";
 import { useWindowWidth } from "@react-hook/window-size";
 import { usePathname, useRouter } from "next/navigation";
@@ -18,6 +11,7 @@ import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import Auth from "../Auth/Auth";
 import routes from "@/routes";
+import Link from "next/link";
 
 interface TabItems {
   [key: string]: {
@@ -35,13 +29,7 @@ interface ChildrenProps {
 }
 
 interface Props {
-  children: ({
-    user,
-    setUser,
-    activeTab,
-    setActiveTab,
-    tabItems,
-  }: ChildrenProps) => JSX.Element;
+  children: ({ user, setUser, activeTab, setActiveTab, tabItems }: ChildrenProps) => JSX.Element;
 }
 
 export default function Wrapper() {
@@ -71,27 +59,23 @@ export default function Wrapper() {
   const router = useRouter();
 
   return (
-    <StyledSidebar
-      data-isTablet={isTablet}
-      className="border-r-2 border-gray-20"
-    >
+    <StyledSidebar data-isTablet={isTablet} className="border-r-2 border-gray-20">
       <div className="flex flex-col gap-12 ">
         {!isTablet && (
-          <div
+          <Link
+            href="/"
             style={{ letterSpacing: "-2%" }}
-            className="font-medium text-2xl text-center w-full"
+            className="cursor-pointer font-medium text-2xl text-center w-full"
           >
             CrowdCanvas
-          </div>
+          </Link>
         )}
         <div>
           {Object.keys(tabItems).map((key, index) => {
             const { label, Icon } = tabItems[key];
             return (
               <div
-                className={` flex gap-5 py-8 px-9 cursor-pointer ${
-                  key === activeTab ? "bg-[#d9d9d9]" : ""
-                } `}
+                className={` flex gap-5 py-8 px-9 cursor-pointer ${key === activeTab ? "bg-[#d9d9d9]" : ""} `}
                 key={index}
                 onClick={() => {
                   setActiveTab(key);
@@ -108,9 +92,7 @@ export default function Wrapper() {
 
       <div className="flex justify-center">
         {user ? (
-          <Button onClick={() => router.push("/create")}>
-            {isTablet ? <Plus /> : "New Post"}
-          </Button>
+          <Button onClick={() => router.push("/create")}>{isTablet ? <Plus /> : "New Post"}</Button>
         ) : (
           <Auth>
             {({ proceed }) => (
